@@ -32,7 +32,6 @@ alter procedure up_index_auto_maintenance
 
 as
 begin  
-
 declare @index_holder sysname
 
 declare @dynamic_rebuild nvarchar(200)
@@ -41,14 +40,11 @@ set @dynamic_rebuild = 'alter [' + @index_holder + '] on [' + db_name() +']  reb
 declare @dynamic_reorganize nvarchar(200)
 set @dynamic_reorganize = 'alter [' + @index_holder + '] on [' + db_name() +']  reorganize'
 
-	
 	declare cr_index cursor
-	
 	for 
 		select [index_name] from #temptable
 
 	open cr_index
-		
 		fetch next from cr_index into @index_holder
 
 		while @@fetch_status = 0
@@ -58,7 +54,6 @@ set @dynamic_reorganize = 'alter [' + @index_holder + '] on [' + db_name() +']  
 				exec(@dynamic_rebuild)
 				print @index_holder + 'is rebuilt'
 			end
-
 			else
 			begin
 				exec(@dynamic_reorganize)
@@ -67,12 +62,11 @@ set @dynamic_reorganize = 'alter [' + @index_holder + '] on [' + db_name() +']  
 			
 			fetch next from cr_index into @index_holder
 		end
-
 	close cr_index
 	deallocate cr_index
-
 end
 
+-- Execute Procedure
 exec up_index_auto_maintenance
 
 
