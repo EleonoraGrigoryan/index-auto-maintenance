@@ -1,14 +1,16 @@
 -- Auto Maintenance
 
--- Select all the indexes in a specified database
+/* 
+ * Select all the indexes in a specified database
+ *
+ * select 
+ *    idx.[name] as [Index]
+ * from sys.indexes as idx
+ * inner join sys.objects as obj on idx.object_id = obj.object_id
+ * where idx.[name] is not null and obj.[type] = 'u'
+ * order by idx.[name]
+ */
  
-select 
-   idx.[name] as [Index]
-from sys.indexes as idx
-inner join sys.objects as obj on idx.object_id = obj.object_id
-where idx.[name] is not null and obj.[type] = 'u'
-order by idx.[name]
-
 /*
  * Print more information about chosen indexes
  *
@@ -25,4 +27,36 @@ order by idx.[name]
  * order by [Table]
  */
  
- 
+ -- Create a cursor inside a sproc to iterate all the selected indexes
+create procedure up_index_auto_maintenance
+as
+begin
+
+ declare @index_holder sysname
+
+ declare cr_index cursor
+ for 
+   select 
+    idx.[name] as [Index]
+   from sys.indexes as idx
+   inner join sys.objects as obj on idx.object_id = obj.object_id
+   where idx.[name] is not null and obj.[type] = 'u'
+   order by idx.[name]
+
+ open cr_index
+
+ fetch next from cr_index into @index_holder
+
+ WHILE @@fetch_status = 0
+ begin
+    -- do something (f. ex. print @index_holder)
+    fetch next from cr_index into @index_holder
+ end
+
+ close cr_index
+ deallocate cr_index
+
+end
+
+-- Execute the procedure
+exec up_index_auto_maintenance
