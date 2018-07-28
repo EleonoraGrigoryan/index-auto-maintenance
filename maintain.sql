@@ -33,6 +33,12 @@ as
 begin
 
  declare @index_holder sysname
+ 
+ declare @dynamic_rebuild nvarchar(200)
+ set @dynamic_rebuild = 'alter [' + @index_holder + '] on [' + db_name() +']  rebuild with (drop_existing = on, fillfactor = 80)'
+
+ declare @dynamic_reorganize nvarchar(200)
+ set @dynamic_reorganize = 'alter [' + @index_holder + '] on [' + db_name() +']  reorganize'
 
  declare cr_index cursor
  for 
@@ -60,3 +66,5 @@ end
 
 -- Execute the procedure
 exec up_index_auto_maintenance
+GO
+
