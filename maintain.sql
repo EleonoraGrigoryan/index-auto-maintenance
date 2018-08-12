@@ -35,7 +35,7 @@ declare @dynamic_reorganize nvarchar(200)
 		begin
 			if @fragmentation_holder  > 30
 			begin
-				set @dynamic_rebuild = 'alter index [' + @index_holder + '] on [' +  @tablename_holder +']  rebuild with (drop_existing = on, fillfactor = 80)'
+				set @dynamic_rebuild = 'alter index [' + @index_holder + '] on [' +  @tablename_holder +']  rebuild with (fillfactor = 80)'
 				exec(@dynamic_rebuild)
 				print @index_holder + 'is rebuilt'
 			end
