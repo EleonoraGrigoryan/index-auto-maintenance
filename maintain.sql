@@ -37,12 +37,14 @@ declare @dynamic_reorganize nvarchar(200)
 			begin
 				set @dynamic_rebuild = 'alter index [' + @index_holder + '] on [' +  @tablename_holder +']  rebuild with (fillfactor = 80)'
 				exec(@dynamic_rebuild)
+				print @dynamic_rebuild
 				print @index_holder + 'is rebuilt'
 			end
 			else
 			begin
 				set @dynamic_reorganize = 'alter index  [' + @index_holder + '] on [' +  @tablename_holder +']  reorganize'
 				exec(@dynamic_reorganize)
+				print @dynamic_reorganize
 				print @index_holder + ' is reorganized'
 			end
 			
