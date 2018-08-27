@@ -1,7 +1,7 @@
 -- Auto Rebuild or Reorganize Based on Fragmentation Percent
 
 -- Declare Variables 
-declare @index_holder	       nvarchar(150)
+declare @index_holder	        nvarchar(150)
 declare @fragmentation_holder  int
 declare @tablename_holder      nvarchar(80)
 declare @schema_holder n       nvarchar(80)
