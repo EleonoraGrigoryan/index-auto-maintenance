@@ -4,7 +4,7 @@
 declare @index_holder	        nvarchar(150)
 declare @fragmentation_holder  int
 declare @tablename_holder      nvarchar(80)
-declare @schema_holder n       nvarchar(80)
+declare @schema_holder        nvarchar(80)
 declare @dynamic_rebuild       nvarchar(200)
 declare @dynamic_reorganize    nvarchar(200)
 --------------------------------------------
