@@ -30,7 +30,7 @@ open cr_index
 	begin
 		if @fragmentation_holder  > 30
 		begin
-			set @dynamic_rebuild = 'alter index [' + @index_holder + '] on [' + @schema_holder + '.' + @tablename_holder +']  rebuild with (fillfactor = 80)'
+			set @dynamic_rebuild = 'alter index ' + @index_holder + ' on ' + @schema_holder + '.' + @tablename_holder +'  rebuild with (fillfactor = 80)'
 			exec(@dynamic_rebuild)
 			print @dynamic_rebuild
 			print @index_holder + 'is rebuilt'
@@ -38,7 +38,7 @@ open cr_index
 
 		else
 		begin
-			set @dynamic_reorganize = 'alter index  [' + @index_holder + '] on [' + @schema_holder + '.' + @tablename_holder +']  reorganize'
+			set @dynamic_reorganize = 'alter index  ' + @index_holder + ' on ' + @schema_holder + '.' + @tablename_holder +'  reorganize'
 			exec(@dynamic_reorganize)
 			print @dynamic_reorganize
 			print @index_holder + ' is reorganized'
