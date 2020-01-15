@@ -3,5 +3,5 @@ Transact SQL script to maintain indexes automatically for a current database. It
 The choice of the fragmentation percent is based on Microsoft recommendations.
 
 ----
-MIT License <br>
+
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
